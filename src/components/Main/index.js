@@ -174,15 +174,15 @@ function Main() {
   return (
     <div className={styles.wrapper}>
       <ReactFlow
-        nodes={nodes}
-        edges={edges}
+        // nodes={nodes}
+        // edges={edges}
+        elements={[...nodes, ...edges]}
         connectionLineStyle={connectionLineStyle}
         snapToGrid={true}
         defaultZoom={1}
         nodeTypes={nodeTypes}
         zoomOnDoubleClick={false}
         className={styles.flowArea}
-        fitView
         panOnScroll={true}
         panOnScrollMode={'vertical'}
         translateExtent={[

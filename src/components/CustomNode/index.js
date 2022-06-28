@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 function CustomNode({ data }) {
     return (
-        <div className={classNames(styles.node)}>
+        <div className={classNames(styles.node, 'nodrag')}>
             {data.type !== 'owner' ? <Handle
                 type="target"
                 position="left"

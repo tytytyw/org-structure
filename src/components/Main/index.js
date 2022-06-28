@@ -8,7 +8,7 @@ function Main() {
   const connectionLineStyle = { stroke: "#b1b1b7" };
   const defaultOffset = 5
   const defaultSize = { x: 240, y: 64 }
-  const [nodes, setNodes] = useState([
+  const [nodes] = useState([
     {
       data: {
         avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-300x300.jpg',
@@ -155,27 +155,15 @@ function Main() {
       type: 'special'
     },
   ]);
-  const [edges, setEdges] = useState([{ id: "line_1_2", source: "1", style: { strokeWidth: 2 }, target: "2", type: "step" }, { id: "line2_3", source: "2", style: { strokeWidth: 2 }, target: "3", type: "step" }, { id: "line2_4", source: "2", style: { strokeWidth: 2 }, target: "4", type: "step" }, { id: "line1_5", source: "1", style: { strokeWidth: 2 }, target: "5", type: "step" }, { id: "line5_6", source: "5", style: { strokeWidth: 2 }, target: "6", type: "step" }, { id: "line5_7", source: "5", style: { strokeWidth: 2 }, target: "7", type: "step" }, { id: "line5_8", source: "5", style: { strokeWidth: 2 }, target: "8", type: "step" }, { id: "line8_9", source: "8", style: { strokeWidth: 2 }, target: "9", type: "step" }, { id: "line5_10", source: "5", style: { strokeWidth: 2 }, target: "10", type: "step" }, { id: "line5_11", source: "5", style: { strokeWidth: 2 }, target: "11", type: "step" }])
+  const [edges] = useState([{ id: "line_1_2", source: "1", style: { strokeWidth: 2 }, target: "2", type: "step" }, { id: "line2_3", source: "2", style: { strokeWidth: 2 }, target: "3", type: "step" }, { id: "line2_4", source: "2", style: { strokeWidth: 2 }, target: "4", type: "step" }, { id: "line1_5", source: "1", style: { strokeWidth: 2 }, target: "5", type: "step" }, { id: "line5_6", source: "5", style: { strokeWidth: 2 }, target: "6", type: "step" }, { id: "line5_7", source: "5", style: { strokeWidth: 2 }, target: "7", type: "step" }, { id: "line5_8", source: "5", style: { strokeWidth: 2 }, target: "8", type: "step" }, { id: "line8_9", source: "8", style: { strokeWidth: 2 }, target: "9", type: "step" }, { id: "line5_10", source: "5", style: { strokeWidth: 2 }, target: "10", type: "step" }, { id: "line5_11", source: "5", style: { strokeWidth: 2 }, target: "11", type: "step" }])
 
   const nodeTypes = {
-    special: CustomNode
+    special: CustomNode,
   };
-
-  useEffect(() => {
-
-    document.querySelector('#debug').innerHTML += ' scriptLoaded; '
-    document.querySelectorAll('style').forEach(tag => document.querySelector('#debug').innerHTML += `style- ${tag.getAttribute('data-id')}: loaded;`)
-    document.querySelector('#debug').ondblclick = () => document.querySelector('#debug').remove()
-
-    document.querySelector('#debug').innerHTML += ` reactLoaded; usersData= ${nodes}; users length: ${nodes.length};  rootHeight:${document.querySelector('#root').clientHeight}; rootHeight:${document.querySelector('#root').clientHeight}; rootWidth:${document.querySelector('#root').clientWidth};`
-    document.querySelector('#debug').onclick = () => document.querySelector('#debug').innerHTML += ` rootHeight_afterRender:${document.querySelector('#root').clientHeight}; rootWidth_afterRender:${document.querySelector('#root').clientWidth}`
-  }, [])
 
   return (
     <div className={styles.wrapper}>
       <ReactFlow
-        // nodes={nodes}
-        // edges={edges}
         elements={[...nodes, ...edges]}
         connectionLineStyle={connectionLineStyle}
         snapToGrid={true}
@@ -186,12 +174,13 @@ function Main() {
         panOnScroll={true}
         panOnScrollMode={'vertical'}
         translateExtent={[
-          [-500, -500],
+          [0, 0],
           [Infinity, Infinity]
         ]}
         minZoom={0.5}
+        maxZoom={1.5}
       >
-        <Controls showInteractive={false} />
+        <Controls showInteractive={false} showFitView={false} />
       </ReactFlow>
     </div >
   );

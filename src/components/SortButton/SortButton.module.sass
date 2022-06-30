@@ -1,0 +1,44 @@
+.wrapper
+    position: relative
+    overflow: hidden
+    z-index: 1
+    display: flex
+    align-items: center
+    width: 26px
+    .subButtons
+        display: flex
+        transform: translateX(-100%)
+        transition: transform .5s ease
+        position: absolute
+        bottom: 0
+        left: 0
+    .mainButton
+        z-index: 2
+        &.active
+            background: #1976d2
+            svg
+                path
+                    fill: #fff
+    &.active
+        width: 130px
+        .subButtons
+            display: flex
+            transform: translateX(26px)
+            .subButton
+                &#LR
+                    svg
+                        transform: rotate(90deg)
+                &#RL
+                    svg
+                        transform: rotate(-90deg)
+
+                &#TB
+                    svg
+                        transform: rotate(180deg)
+                &.active
+                    background: #fff
+                    cursor: default
+                    opacity: 1
+                    svg
+                        path
+                            fill: #1976d2

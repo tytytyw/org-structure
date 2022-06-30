@@ -1,7 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Main.module.sass";
-import ReactFlow, { Controls } from "react-flow-renderer";
+import ReactFlow, {
+  Controls, useZoomPanHelper,
+  ReactFlowProvider,
+} from "react-flow-renderer";
 import CustomNode from "../CustomNode";
+import SortButton from '../SortButton'
 import dagre from 'dagre';
 
 
@@ -10,8 +14,10 @@ function Main() {
   const [direction, setDirection] = useState('LR')
 
   const connectionLineStyle = { stroke: "#b1b1b7" };
-  const [nodes, setNodes] = useState(document.userNodes || []);
-  const [edges, setEdges] = useState(document.userEdges || [])
+  const initialNodes = document.userNodes;
+  const initialEdges = document.userEdges
+  const [nodes, setNodes] = useState(initialNodes || []);
+  const [edges, setEdges] = useState(initialEdges || [])
 
   const nodeTypes = {
     special: CustomNode
@@ -25,7 +31,7 @@ function Main() {
 
 
   const getLayoutedElements = (nodes, edges, direction) => {
-    const isHorizontal = direction === 'LR';
+    const isHorizontal = direction === 'LR' || direction === 'RL';
     dagreGraph.setGraph({ rankdir: direction });
 
     nodes.forEach((node) => {
@@ -40,14 +46,11 @@ function Main() {
 
     nodes.forEach((node) => {
       const nodeWithPosition = dagreGraph.node(node.id);
-      node.targetPosition = isHorizontal ? 'left' : 'top';
-      node.sourcePosition = isHorizontal ? 'right' : 'bottom';
-
-      // We are shifting the dagre node position (anchor=center center) to the top left
-      // so it matches the React Flow node anchor point (top left).
+      node.targetPosition = isHorizontal ? direction === 'RL' ? 'right' : 'left' : direction === 'BT' ? 'bottom' : 'top';
+      node.sourcePosition = isHorizontal ? direction === 'RL' ? 'left' : 'right' : direction === 'BT' ? 'top' : 'bottom';
       node.position = {
-        x: nodeWithPosition.x - nodeWidth / 2 + 10,
-        y: nodeWithPosition.y - nodeHeight / 2 + 10,
+        x: nodeWithPosition.x - nodeWidth / 2,
+        y: nodeWithPosition.y - nodeHeight / 2,
       };
 
       return node;
@@ -56,33 +59,25 @@ function Main() {
     return { nodes, edges };
   };
 
-  const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+  getLayoutedElements(
     nodes,
     edges,
     direction
   );
 
-  const onLayout = (direction) => {
-    const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-      nodes,
-      edges,
-      direction
-    );
+  const UseZoomPanHelperFlow = () => {
+    const { project, setCenter, zoomIn, zoomOut, fitView } = useZoomPanHelper();
 
-    setNodes([...layoutedNodes]);
-    setEdges([...layoutedEdges]);
+    useEffect(() => {
 
-  }
+      setNodes(getLayoutedElements(nodes, edges, direction).nodes)
+      setEdges(getLayoutedElements(nodes, edges, direction).edges)
+      fitView()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [direction])
 
-  useEffect(() => {
-    setNodes(getLayoutedElements(nodes, edges, direction).nodes)
-    setEdges(getLayoutedElements(nodes, edges, direction).edges)
-  }, [direction])
+    return (
 
-
-
-  return (
-    <div className={styles.wrapper}>
       <ReactFlow
         elements={[...nodes, ...edges]}
         connectionLineStyle={connectionLineStyle}
@@ -92,22 +87,29 @@ function Main() {
         zoomOnDoubleClick={false}
         className={styles.flowArea}
         panOnScroll={true}
+        onLoad={fitView}
         panOnScrollMode={'vertical'}
         translateExtent={[
-          [-500, -500],
+          [-Infinity, -Infinity],
           [Infinity, Infinity]
         ]}
-        minZoom={0.5}
+        minZoom={0.1}
         maxZoom={1.5}
       >
-        <Controls showInteractive={false} showFitView={false} />
-
-
+        <Controls showInteractive={false} showFitView={true}>
+          <SortButton direction={direction} setDirection={setDirection} />
+        </Controls>
       </ReactFlow>
-      <div className="controls" style={{ position: 'absolute', bottom: 10, right: 10, zIndex: 10 }}>
-        <button onClick={() => setDirection('TB')}>vertical layout</button>
-        <button onClick={() => setDirection('LR')}>horizontal layout</button>
-      </div>
+    );
+  };
+
+
+  return (
+    <div className={styles.wrapper}>
+      <ReactFlowProvider>
+        <UseZoomPanHelperFlow />
+      </ReactFlowProvider>
+
     </div >
   );
 }

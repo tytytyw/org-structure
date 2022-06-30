@@ -1,165 +1,85 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./Main.module.sass";
 import ReactFlow, { Controls } from "react-flow-renderer";
 import CustomNode from "../CustomNode";
+import dagre from 'dagre';
+
 
 function Main() {
 
-  const connectionLineStyle = { stroke: "#b1b1b7" };
-  const defaultOffset = 5
-  const defaultSize = { x: 240, y: 64 }
-  const [nodes] = useState([
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-300x300.jpg',
-        name: 'Игорь',
-        middleName: 'Александрович',
-        surname: 'Фамилин',
-        position: 'Ген. директор',
-        type: 'owner',
-        hasSubordinates: true
-      },
-      id: '1',
-      position: { x: defaultSize.x * 0 / 2 + defaultOffset, y: defaultSize.y * 0 },
-      type: 'special'
-    },
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-300x300.jpg',
-        name: 'Имя',
-        middleName: 'Отчество',
-        surname: 'Фамилия',
-        position: 'Начальник отдела продаж',
-        hasSubordinates: true,
-      },
-      id: '2',
-      position: { x: defaultSize.x * 1 / 2 + defaultOffset * 5, y: (defaultSize.y * 1) + defaultSize.y / 2 + defaultOffset },
-      type: 'special'
-    },
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-300x300.jpg',
-        name: 'Имя',
-        middleName: 'Отчество',
-        surname: 'Фамилия',
-        position: 'Менеджер',
-        hasSubordinates: false,
-      },
-      id: '3',
-      position: { x: defaultSize.x * 2 / 2 + defaultOffset * 8, y: defaultSize.y * 3 + defaultOffset },
-      type: 'special'
-    },
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer4-300x300.jpg',
-        name: 'Имя',
-        middleName: 'Отчество',
-        surname: 'Фамилия',
-        position: 'Менеджер',
-        hasSubordinates: false,
-      },
-      id: '4',
-      position: { x: defaultSize.x * 2 / 2 + defaultOffset * 8, y: defaultSize.y * 4.5 + defaultOffset },
-      type: 'special'
-    },
+  const [direction, setDirection] = useState('LR')
 
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-300x300.jpg',
-        name: 'Имя',
-        middleName: 'Отчество',
-        surname: 'Фамилия',
-        position: 'Начальник отдела закупок',
-        hasSubordinates: true,
-      },
-      id: '5',
-      position: { x: defaultSize.x * 1 / 2 + defaultOffset * 5, y: (defaultSize.y * 1) + defaultSize.y * 10 / 2 + defaultOffset },
-      type: 'special'
-    },
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-300x300.jpg',
-        name: 'Имя',
-        middleName: 'Отчество',
-        surname: 'Фамилия',
-        position: 'Менеджер',
-        hasSubordinates: false,
-      },
-      id: '6',
-      position: { x: defaultSize.x * 2 / 2 + defaultOffset * 8, y: defaultSize.y * 7.5 + defaultOffset },
-      type: 'special'
-    },
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-300x300.jpg',
-        name: 'Имя',
-        middleName: 'Отчество',
-        surname: 'Фамилия',
-        position: 'Менеджер',
-        hasSubordinates: false,
-      },
-      id: '7',
-      position: { x: defaultSize.x * 2 / 2 + defaultOffset * 8, y: defaultSize.y * 9 + defaultOffset },
-      type: 'special'
-    },
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer8-300x300.jpg',
-        name: 'Имя',
-        middleName: 'Отчество',
-        surname: 'Фамилия',
-        position: 'Менеджер',
-        hasSubordinates: true,
-      },
-      id: '8',
-      position: { x: defaultSize.x * 2 / 2 + defaultOffset * 8, y: defaultSize.y * 10.5 + defaultOffset },
-      type: 'special'
-    },
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer9-300x300.jpg',
-        name: 'Имя',
-        middleName: 'Отчество',
-        surname: 'Фамилия',
-        position: 'Менеджер-стажер',
-        hasSubordinates: false,
-      },
-      id: '9',
-      position: { x: defaultSize.x * 3 / 2 + defaultOffset * 11, y: defaultSize.y * 12 + defaultOffset },
-      type: 'special'
-    },
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-300x300.jpg',
-        name: 'Имя',
-        middleName: 'Отчество',
-        surname: 'Фамилия',
-        position: 'Менеджер',
-        hasSubordinates: false,
-      },
-      id: '10',
-      position: { x: defaultSize.x * 2 / 2 + defaultOffset * 8, y: defaultSize.y * 13.5 + defaultOffset },
-      type: 'special'
-    },
-    {
-      data: {
-        avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-300x300.jpg',
-        name: 'Имя',
-        middleName: 'Отчество',
-        surname: 'Фамилия',
-        position: 'Менеджер',
-        hasSubordinates: false,
-      },
-      id: '11',
-      position: { x: defaultSize.x * 2 / 2 + defaultOffset * 8, y: defaultSize.y * 15 + defaultOffset },
-      type: 'special'
-    },
-  ]);
-  const [edges] = useState([{ id: "line_1_2", source: "1", style: { strokeWidth: 2 }, target: "2", type: "step" }, { id: "line2_3", source: "2", style: { strokeWidth: 2 }, target: "3", type: "step" }, { id: "line2_4", source: "2", style: { strokeWidth: 2 }, target: "4", type: "step" }, { id: "line1_5", source: "1", style: { strokeWidth: 2 }, target: "5", type: "step" }, { id: "line5_6", source: "5", style: { strokeWidth: 2 }, target: "6", type: "step" }, { id: "line5_7", source: "5", style: { strokeWidth: 2 }, target: "7", type: "step" }, { id: "line5_8", source: "5", style: { strokeWidth: 2 }, target: "8", type: "step" }, { id: "line8_9", source: "8", style: { strokeWidth: 2 }, target: "9", type: "step" }, { id: "line5_10", source: "5", style: { strokeWidth: 2 }, target: "10", type: "step" }, { id: "line5_11", source: "5", style: { strokeWidth: 2 }, target: "11", type: "step" }])
+  const connectionLineStyle = { stroke: "#b1b1b7" };
+  const [nodes, setNodes] = useState(document.userNodes || []);
+  const [edges, setEdges] = useState(document.userEdges || [])
 
   const nodeTypes = {
-    special: CustomNode,
+    special: CustomNode
   };
+
+  const dagreGraph = new dagre.graphlib.Graph();
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+  const nodeWidth = 300;
+  const nodeHeight = 50;
+
+
+  const getLayoutedElements = (nodes, edges, direction) => {
+    const isHorizontal = direction === 'LR';
+    dagreGraph.setGraph({ rankdir: direction });
+
+    nodes.forEach((node) => {
+      dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
+    });
+
+    edges.forEach((edge) => {
+      dagreGraph.setEdge(edge.source, edge.target);
+    });
+
+    dagre.layout(dagreGraph);
+
+    nodes.forEach((node) => {
+      const nodeWithPosition = dagreGraph.node(node.id);
+      node.targetPosition = isHorizontal ? 'left' : 'top';
+      node.sourcePosition = isHorizontal ? 'right' : 'bottom';
+
+      // We are shifting the dagre node position (anchor=center center) to the top left
+      // so it matches the React Flow node anchor point (top left).
+      node.position = {
+        x: nodeWithPosition.x - nodeWidth / 2 + 10,
+        y: nodeWithPosition.y - nodeHeight / 2 + 10,
+      };
+
+      return node;
+    });
+
+    return { nodes, edges };
+  };
+
+  const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+    nodes,
+    edges,
+    direction
+  );
+
+  const onLayout = (direction) => {
+    const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+      nodes,
+      edges,
+      direction
+    );
+
+    setNodes([...layoutedNodes]);
+    setEdges([...layoutedEdges]);
+
+  }
+
+  useEffect(() => {
+    setNodes(getLayoutedElements(nodes, edges, direction).nodes)
+    setEdges(getLayoutedElements(nodes, edges, direction).edges)
+  }, [direction])
+
+
 
   return (
     <div className={styles.wrapper}>
@@ -174,14 +94,20 @@ function Main() {
         panOnScroll={true}
         panOnScrollMode={'vertical'}
         translateExtent={[
-          [0, 0],
+          [-500, -500],
           [Infinity, Infinity]
         ]}
         minZoom={0.5}
         maxZoom={1.5}
       >
         <Controls showInteractive={false} showFitView={false} />
+
+
       </ReactFlow>
+      <div className="controls" style={{ position: 'absolute', bottom: 10, right: 10, zIndex: 10 }}>
+        <button onClick={() => setDirection('TB')}>vertical layout</button>
+        <button onClick={() => setDirection('LR')}>horizontal layout</button>
+      </div>
     </div >
   );
 }

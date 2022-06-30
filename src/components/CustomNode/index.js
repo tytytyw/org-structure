@@ -4,12 +4,12 @@ import { Handle } from "react-flow-renderer";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
-function CustomNode({ data }) {
+function CustomNode({ data, ...props }) {
     return (
         <div className={classNames(styles.node, 'nodrag')}>
-            {data.type !== 'owner' ? <Handle
+            {props.targetPosition && !data.isNotTarget ? <Handle
                 type="target"
-                position="left"
+                position={props.targetPosition}
                 isConnectable={false}
                 style={{
                     width: 10,
@@ -33,9 +33,9 @@ function CustomNode({ data }) {
                     <p className={styles.position}>{data.position}</p>
                 </div>
             </div>
-            {data.hasSubordinates ? <Handle
+            {props.sourcePosition && !data.isDontHaveTarget ? <Handle
+                position={props.sourcePosition}
                 type="source"
-                position="bottom"
                 isConnectable={false}
                 style={{
                     width: 10,

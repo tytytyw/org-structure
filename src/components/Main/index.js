@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./Main.module.sass";
 import ReactFlow, {
   Controls, useZoomPanHelper,
@@ -19,7 +19,8 @@ function Main({ getElements }) {
   const [edges, setEdges] = useState(getElements(initialElements, collapsedElements).edges || []);
   const [defaultZoom, setDefaultZoom] = useState(.5);
   const [defaultPosition, setDefaultPosition] = useState([50, 50]);
-  const [showLoader, setShowLoader] = useState(true)
+  const [showLoader, setShowLoader] = useState(true);
+  const controlsRef = useRef()
 
   const nodeTypes = {
     special: CustomNode
@@ -29,11 +30,11 @@ function Main({ getElements }) {
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
   const nodeWidth = 300;
-  const nodeHeight = 50;
+  const nodeHeight = direction === 'LR' || direction === 'RL' ? 50 : 100;
 
   const onElementClick = (e, element) => {
     let filterIds = collapsedElements;
-    if (isNode(element)) {
+    if (isNode(element) && (e.target.className.includes('handle') || e.target.parentElement?.className.includes('handle'))) {
       if (collapsedElements.some(el => el === element.id)) {
         filterIds = collapsedElements.filter(el => el !== element.id)
       } else {
@@ -86,12 +87,14 @@ function Main({ getElements }) {
     const { fitView } = useZoomPanHelper();
 
     const onLoad = (reactFlowInstance) => {
+      controlsRef.current.style.display = 'none';
       fitView()
       setTimeout(() => {
         fitView()
         setTimeout(() => {
 
           const { position, zoom } = reactFlowInstance.toObject()
+          controlsRef.current.style = ''
           setShowLoader(false)
 
           if ((position[0] === defaultPosition[0] || position[1] === defaultPosition[1]) && (zoom[0] === defaultZoom[0] || zoom[1] === defaultZoom[1])) return false
@@ -137,9 +140,11 @@ function Main({ getElements }) {
         zoomOnPinch={false}
         onlyRenderVisibleElements={true}
       >
-        <Controls showInteractive={false} showFitView={true}>
-          <SortButton direction={direction} setDirection={setDirection} setShowLoader={setShowLoader} />
-        </Controls>
+        <div ref={controlsRef}>
+          <Controls showInteractive={false} showFitView={true} >
+            <SortButton direction={direction} setDirection={setDirection} setShowLoader={setShowLoader} />
+          </Controls>
+        </div>
       </ReactFlow>
     );
   };
@@ -150,7 +155,6 @@ function Main({ getElements }) {
       <ReactFlowProvider>
         <UseZoomPanHelperFlow />
       </ReactFlowProvider>
-
     </div >
   );
 }

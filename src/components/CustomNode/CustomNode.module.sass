@@ -49,3 +49,49 @@
             width: max-content
             text-overflow: ellipsis
             max-width: 147px
+
+    .additionalDots
+        position: relative
+        width: 30px
+        height: 10px
+        &::before,
+        &::after
+            content: ''
+            position: absolute
+            width: 5px
+            height: 5px
+            background: #1976D2
+            top: 50%
+            border-radius: 50%
+            transform: translateY(-50%)
+        &::before
+            right: 0
+        &::after
+            right: 10px
+        &.left
+            transform: rotate(180deg) translateX(100%)
+            &::before
+                right: 10px
+            &::after
+                right: 20px
+
+        &.top
+            transform: rotate(270deg) translateX(50%) translateY(-100%)
+            &::before
+                right: 5px
+            &::after
+                right: 15px
+
+        &.bottom
+            transform: rotate(90deg) translateX(50%) translateY(100%)
+            &::before
+                right: 5px
+            &::after
+                right: 15px
+
+        &:hover::before,
+        &:hover::after
+            opacity: .7
+        &:active::before,
+        &:active::after
+            opacity: .3

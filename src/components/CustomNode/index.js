@@ -5,6 +5,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 
 function CustomNode({ data, ...props }) {
+
     return (
         <div className={classNames(styles.node, 'nodrag')}>
             {props.targetPosition && !data?.isNotTarget ? <Handle
@@ -43,12 +44,20 @@ function CustomNode({ data, ...props }) {
                         width: 10,
                         height: 10,
                         borderRadius: 50,
-                        background: data.collapse ? "#FB4E4E" : "#1976D2",
+                        background: "#1976D2",
                         zIndex: 2,
                         border: 'none',
                         cursor: 'pointer',
                     }}
-                />
+                >
+                    <div
+                        className={classNames({
+                            [styles.additionalDots]: data.collapse,
+                            [styles[props.sourcePosition]]: true
+                        })}
+                    >
+                    </div>
+                </Handle>
                 : null}
 
         </div>

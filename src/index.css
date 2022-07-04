@@ -47,3 +47,11 @@ div.react-flow__controls {
 div.react-flow__handle {
     pointer-events: all;
 }
+
+div.react-flow__handle.source:hover {
+    opacity: .7;
+}
+
+div.react-flow__handle.source:active {
+    opacity: .5;
+}

@@ -6,9 +6,7 @@ import classNames from 'classnames'
 
 const SortButton = ({ direction, setDirection, setShowLoader }) => {
     const [openMenu, setOpenMenu] = useState(false);
-
     const controlButtonClassName = 'react-flow__controls-button';
-
 
     return (
         <div className={classNames({ [styles.wrapper]: true, [styles.active]: openMenu })}>
@@ -49,10 +47,7 @@ const SortButton = ({ direction, setDirection, setShowLoader }) => {
                 >
                     <ArrowIcon />
                 </button>
-
             </div>
-
-
 
         </div>
 

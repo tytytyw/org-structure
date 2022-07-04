@@ -23,7 +23,7 @@ function getElements(arr, filteredIds = []) {
             collapse: filteredIds.some(filtredId => item.id === filtredId),
             isDontHaveTarget:
               !item.subordinates?.length,
-            isNotTarget: item.isNotTarget
+            isNotTarget: item.data.isNotTarget
           }
         })
 

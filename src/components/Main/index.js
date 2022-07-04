@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Main.module.sass";
 import ReactFlow, {
   Controls, useZoomPanHelper,
-  ReactFlowProvider,
+  ReactFlowProvider, isNode
 } from "react-flow-renderer";
 import CustomNode from "../CustomNode";
 import SortButton from '../SortButton'
@@ -12,12 +12,14 @@ import dagre from 'dagre';
 function Main() {
 
   const [direction, setDirection] = useState('LR')
-
   const connectionLineStyle = { stroke: "#b1b1b7" };
   const initialNodes = document.userNodes;
   const initialEdges = document.userEdges
   const [nodes, setNodes] = useState(initialNodes || []);
-  const [edges, setEdges] = useState(initialEdges || [])
+  const [edges, setEdges] = useState(initialEdges || []);
+  const [defaultZoom, setDefaultZoom] = useState(.5);
+  const [defaultPosition, setDefaultPosition] = useState([50, 50]);
+  const [showLoader, setShowLoader] = useState(true)
 
   const nodeTypes = {
     special: CustomNode
@@ -29,6 +31,10 @@ function Main() {
   const nodeWidth = 300;
   const nodeHeight = 50;
 
+  const onElementClick = (e, element) => {
+    console.log(element)
+    console.log(isNode(element))
+  }
 
   const getLayoutedElements = (nodes, edges, direction) => {
     const isHorizontal = direction === 'LR' || direction === 'RL';
@@ -52,6 +58,7 @@ function Main() {
         x: nodeWithPosition.x - nodeWidth / 2,
         y: nodeWithPosition.y - nodeHeight / 2,
       };
+      node.setNodes = setNodes
 
       return node;
     });
@@ -66,28 +73,42 @@ function Main() {
   );
 
   const UseZoomPanHelperFlow = () => {
-    const { project, setCenter, zoomIn, zoomOut, fitView } = useZoomPanHelper();
+    const { fitView } = useZoomPanHelper();
+
+    const onLoad = (reactFlowInstance) => {
+      fitView()
+      setTimeout(() => {
+        fitView()
+        setTimeout(() => {
+
+          const { position, zoom } = reactFlowInstance.toObject()
+          setShowLoader(false)
+
+          if ((position[0] === defaultPosition[0] || position[1] === defaultPosition[1]) && (zoom[0] === defaultZoom[0] || zoom[1] === defaultZoom[1])) return false
+          setDefaultZoom(zoom)
+          setDefaultPosition(position)
+        }, 200);
+      }, 100);
+    }
+
 
     useEffect(() => {
-
       setNodes(getLayoutedElements(nodes, edges, direction).nodes)
       setEdges(getLayoutedElements(nodes, edges, direction).edges)
-      fitView()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [direction])
 
     return (
-
       <ReactFlow
         elements={[...nodes, ...edges]}
         connectionLineStyle={connectionLineStyle}
         snapToGrid={true}
-        defaultZoom={1}
+        defaultPosition={defaultPosition}
         nodeTypes={nodeTypes}
         zoomOnDoubleClick={false}
         className={styles.flowArea}
         panOnScroll={true}
-        onLoad={fitView}
+        onLoad={onLoad}
         panOnScrollMode={'vertical'}
         translateExtent={[
           [-Infinity, -Infinity],
@@ -95,17 +116,26 @@ function Main() {
         ]}
         minZoom={0.1}
         maxZoom={1.5}
+        defaultZoom={defaultZoom}
+        style={{ cursor: 'default' }}
+        onElementClick={onElementClick}
+        elementsSelectable={false}
+        nodesDraggable={false}
+        nodesConnectable={false}
+        zoomOnScroll={false}
+        zoomOnPinch={false}
+        onlyRenderVisibleElements={true}
       >
         <Controls showInteractive={false} showFitView={true}>
-          <SortButton direction={direction} setDirection={setDirection} />
+          <SortButton direction={direction} setDirection={setDirection} setShowLoader={setShowLoader} />
         </Controls>
       </ReactFlow>
     );
   };
 
-
   return (
     <div className={styles.wrapper}>
+      {showLoader ? <div className={styles.loader}></div> : null}
       <ReactFlowProvider>
         <UseZoomPanHelperFlow />
       </ReactFlowProvider>

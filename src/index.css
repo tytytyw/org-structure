@@ -38,5 +38,12 @@ div.react-flow__controls {
     padding: 0 0 10px 10px;
     bottom: 0;
     left: 0;
-    background: #fff;
+}
+
+.react-flow__node.react-flow__node-special {
+    cursor: default;
+}
+
+div.react-flow__handle {
+    pointer-events: all;
 }

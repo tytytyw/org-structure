@@ -4,7 +4,7 @@ import { ReactComponent as ArrowIcon } from "./icons/up.svg"
 import { ReactComponent as TreeIcon } from "./icons/tree.svg"
 import classNames from 'classnames'
 
-const SortButton = ({ direction, setDirection }) => {
+const SortButton = ({ direction, setDirection, setShowLoader }) => {
     const [openMenu, setOpenMenu] = useState(false);
 
     const controlButtonClassName = 'react-flow__controls-button';
@@ -23,7 +23,7 @@ const SortButton = ({ direction, setDirection }) => {
                 <button
                     className={classNames({ [controlButtonClassName]: true, [styles.subButton]: true, [styles.active]: direction === 'BT' })}
                     id={styles.BT}
-                    onClick={() => setDirection('BT')}
+                    onClick={() => { setShowLoader(true); setDirection('BT') }}
                 >
                     <ArrowIcon />
                 </button>
@@ -31,21 +31,21 @@ const SortButton = ({ direction, setDirection }) => {
                 <button
                     className={classNames({ [controlButtonClassName]: true, [styles.subButton]: true, [styles.active]: direction === 'TB' })}
                     id={styles.TB}
-                    onClick={() => setDirection('TB')}
+                    onClick={() => { setShowLoader(true); setDirection('TB') }}
                 >
                     <ArrowIcon />
                 </button>
                 <button
                     className={classNames({ [controlButtonClassName]: true, [styles.subButton]: true, [styles.active]: direction === 'RL' })}
                     id={styles.RL}
-                    onClick={() => setDirection('RL')}
+                    onClick={() => { setShowLoader(true); setDirection('RL') }}
                 >
                     <ArrowIcon />
                 </button>
                 <button
                     className={classNames({ [controlButtonClassName]: true, [styles.subButton]: true, [styles.active]: direction === 'LR' })}
                     id={styles.LR}
-                    onClick={() => setDirection('LR')}
+                    onClick={() => { setShowLoader(true); setDirection('LR') }}
                 >
                     <ArrowIcon />
                 </button>

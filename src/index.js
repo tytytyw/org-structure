@@ -7,9 +7,48 @@ import { render } from 'react-dom';
 
 const rootElement = document.getElementById('root');
 
+
+function getElements(arr, filteredIds = []) {
+  const nodes = [];
+  const edges = [];
+
+  function reducer(arr) {
+    arr.forEach(item => {
+      nodes.push(
+        {
+          id: item.id,
+          type: "special",
+          data: {
+            ...item.data,
+            collapse: filteredIds.some(filtredId => item.id === filtredId),
+            isDontHaveTarget:
+              !item.subordinates?.length,
+            isNotTarget: item.isNotTarget
+          }
+        })
+
+      if (item.subordinates?.length && !filteredIds.some(filtredId => item.id === filtredId)) {
+        item.subordinates.forEach(subItem => {
+          edges.push(
+            {
+              id: `${item.id}_${subItem.id}`,
+              type: "step",
+              source: item.id,
+              target: subItem.id
+            })
+        })
+        reducer(item.subordinates)
+      }
+    })
+  }
+  reducer(arr)
+  return ({ nodes, edges })
+
+}
+
 render(
   <React.StrictMode>
-    <Main />
+    <Main getElements={getElements} />
   </React.StrictMode>,
   rootElement
 );

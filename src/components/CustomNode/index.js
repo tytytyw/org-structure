@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 function CustomNode({ data, ...props }) {
     return (
         <div className={classNames(styles.node, 'nodrag')}>
-            {props.targetPosition && !data.isNotTarget ? <Handle
+            {props.targetPosition && !data?.isNotTarget ? <Handle
                 type="target"
                 position={props.targetPosition}
                 isConnectable={false}
@@ -20,30 +20,30 @@ function CustomNode({ data, ...props }) {
             /> : null}
             <div className={styles.person}>
                 <div className={styles.avatar}>
-                    {data.avatar ? <img
+                    {data?.avatar ? <img
                         draggable={false}
-                        src={data.avatar}
+                        src={data?.avatar}
                         alt="avatar"
                         className={styles.icon}
                     /> : null}
                 </div>
                 <div className={styles.text}>
-                    <p className={styles.name}>{data.name + " " + data.middleName}</p>
-                    <p className={styles.name}>{data.surname}</p>
-                    <p className={styles.position}>{data.position}</p>
+                    <p className={styles.name}>{(data?.name || '') + " " + (data?.middleName || '')}</p>
+                    <p className={styles.name}>{data?.surname ?? ''}</p>
+                    <p className={styles.position}>{data?.position}</p>
                 </div>
             </div>
-            {props.sourcePosition && !data.isDontHaveTarget
+            {props.sourcePosition && !data?.isDontHaveTarget
                 ? <Handle
                     position={props.sourcePosition}
                     type="source"
                     isConnectable={false}
-                    title={'свернуть'}
+                    title={data.collapse ? 'развернуть' : 'свернуть'}
                     style={{
                         width: 10,
                         height: 10,
                         borderRadius: 50,
-                        background: "#1976D2",
+                        background: data.collapse ? "#FB4E4E" : "#1976D2",
                         zIndex: 2,
                         border: 'none',
                         cursor: 'pointer',

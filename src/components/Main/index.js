@@ -9,14 +9,14 @@ import SortButton from '../SortButton'
 import dagre from 'dagre';
 
 
-function Main() {
+function Main({ getElements }) {
+  const initialElements = document.userNodes;
+  const [collapsedElements, setCollapsedElements] = useState([])
 
   const [direction, setDirection] = useState('LR')
   const connectionLineStyle = { stroke: "#b1b1b7" };
-  const initialNodes = document.userNodes;
-  const initialEdges = document.userEdges
-  const [nodes, setNodes] = useState(initialNodes || []);
-  const [edges, setEdges] = useState(initialEdges || []);
+  const [nodes, setNodes] = useState(getElements(initialElements, collapsedElements).nodes || []);
+  const [edges, setEdges] = useState(getElements(initialElements, collapsedElements).edges || []);
   const [defaultZoom, setDefaultZoom] = useState(.5);
   const [defaultPosition, setDefaultPosition] = useState([50, 50]);
   const [showLoader, setShowLoader] = useState(true)
@@ -32,8 +32,18 @@ function Main() {
   const nodeHeight = 50;
 
   const onElementClick = (e, element) => {
-    console.log(element)
-    console.log(isNode(element))
+    let filterIds = collapsedElements;
+    if (isNode(element)) {
+      if (collapsedElements.some(el => el === element.id)) {
+        filterIds = collapsedElements.filter(el => el !== element.id)
+      } else {
+        filterIds = [...filterIds, element.id]
+      }
+      const { nodes, edges } = getElements(initialElements, filterIds)
+      setCollapsedElements(filterIds)
+      setNodes(nodes)
+      setEdges(edges)
+    }
   }
 
   const getLayoutedElements = (nodes, edges, direction) => {
@@ -85,6 +95,7 @@ function Main() {
           setShowLoader(false)
 
           if ((position[0] === defaultPosition[0] || position[1] === defaultPosition[1]) && (zoom[0] === defaultZoom[0] || zoom[1] === defaultZoom[1])) return false
+
           setDefaultZoom(zoom)
           setDefaultPosition(position)
         }, 200);

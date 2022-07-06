@@ -7,7 +7,6 @@ import { render } from 'react-dom';
 
 const rootElement = document.getElementById('root');
 
-
 function getElements(arr, filteredIds = []) {
   const nodes = [];
   const edges = [];
@@ -23,7 +22,7 @@ function getElements(arr, filteredIds = []) {
             collapse: filteredIds.some(filtredId => item.id === filtredId),
             isDontHaveTarget:
               !item.subordinates?.length,
-            isNotTarget: item.data.isNotTarget
+            isNotTarget: item.data.isNotTarget,
           }
         })
 
@@ -43,7 +42,6 @@ function getElements(arr, filteredIds = []) {
   }
   reducer(arr)
   return ({ nodes, edges })
-
 }
 
 render(

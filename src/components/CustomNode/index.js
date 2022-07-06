@@ -29,9 +29,9 @@ function CustomNode({ data, ...props }) {
                     /> : null}
                 </div>
                 <div className={styles.text}>
-                    <p className={styles.name}>{(data?.name || '') + " " + (data?.middleName || '')}</p>
-                    <p className={styles.name}>{data?.surname ?? ''}</p>
-                    <p className={styles.position}>{data?.position}</p>
+                    <p className={styles.name} title={(data?.name || '') + " " + (data?.middleName || '')}>{(data?.name || '') + " " + (data?.middleName || '')}</p>
+                    <p className={styles.name} title={data?.surname ?? ''}>{data?.surname ?? ''}</p>
+                    <p className={styles.position} title={data?.position}>{data?.position}</p>
                 </div>
             </div>
             {props.sourcePosition && !data?.isDontHaveTarget

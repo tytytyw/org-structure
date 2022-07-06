@@ -4,10 +4,9 @@ import { ReactComponent as ArrowIcon } from "./icons/up.svg"
 import { ReactComponent as TreeIcon } from "./icons/tree.svg"
 import classNames from 'classnames'
 
-const SortButton = ({ direction, setDirection, setShowLoader }) => {
+const SortButton = ({ direction, setDirection }) => {
     const [openMenu, setOpenMenu] = useState(false);
     const controlButtonClassName = 'react-flow__controls-button';
-
     return (
         <div className={classNames({ [styles.wrapper]: true, [styles.active]: openMenu })}>
             <button
@@ -21,7 +20,7 @@ const SortButton = ({ direction, setDirection, setShowLoader }) => {
                 <button
                     className={classNames({ [controlButtonClassName]: true, [styles.subButton]: true, [styles.active]: direction === 'BT' })}
                     id={styles.BT}
-                    onClick={() => { setShowLoader(true); setDirection('BT') }}
+                    onClick={() => {  setDirection('BT') }}
                 >
                     <ArrowIcon />
                 </button>
@@ -29,21 +28,21 @@ const SortButton = ({ direction, setDirection, setShowLoader }) => {
                 <button
                     className={classNames({ [controlButtonClassName]: true, [styles.subButton]: true, [styles.active]: direction === 'TB' })}
                     id={styles.TB}
-                    onClick={() => { setShowLoader(true); setDirection('TB') }}
+                    onClick={() => {  setDirection('TB') }}
                 >
                     <ArrowIcon />
                 </button>
                 <button
                     className={classNames({ [controlButtonClassName]: true, [styles.subButton]: true, [styles.active]: direction === 'RL' })}
                     id={styles.RL}
-                    onClick={() => { setShowLoader(true); setDirection('RL') }}
+                    onClick={() => {  setDirection('RL') }}
                 >
                     <ArrowIcon />
                 </button>
                 <button
                     className={classNames({ [controlButtonClassName]: true, [styles.subButton]: true, [styles.active]: direction === 'LR' })}
                     id={styles.LR}
-                    onClick={() => { setShowLoader(true); setDirection('LR') }}
+                    onClick={() => {  setDirection('LR') }}
                 >
                     <ArrowIcon />
                 </button>

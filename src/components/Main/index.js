@@ -8,7 +8,7 @@ import CustomNode from "../CustomNode";
 import SortButton from '../SortButton'
 import dagre from 'dagre';
 
-let viewParams = { x: null, y: null, z: null };
+let viewParams = { x: null, y: null, zoom: .5 };
 let fitView = () => { }
 
 
@@ -22,11 +22,12 @@ function Main({ getElements }) {
   const elements = getElements(initialElements, collapsedElements);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
-  const [defaultZoom] = useState(.5);
 
   const nodeTypes = {
     special: CustomNode
   };
+
+  const onMoveEnd = (params) => viewParams = params
 
   const dagreGraph = new dagre.graphlib.Graph({});
   dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -48,6 +49,7 @@ function Main({ getElements }) {
       setEdges(edges)
     }
   }
+
 
   useEffect(() => {
     fitView()
@@ -103,12 +105,12 @@ function Main({ getElements }) {
     const onLoad = (reactFlowInstance) => {
       setTimeout(() => {
         const { position, zoom } = reactFlowInstance.toObject();
-        if (position[0] === viewParams.x && position[1] === viewParams.y && zoom === viewParams.z) {
+        if (position[0] === viewParams.x && position[1] === viewParams.y && zoom === viewParams.zoom) {
           return false
         } else {
           viewParams.x = position[0]
           viewParams.y = position[1]
-          viewParams.z = zoom
+          viewParams.zoom = zoom
         }
       }, 500)
     }
@@ -132,13 +134,14 @@ function Main({ getElements }) {
         ]}
         minZoom={0.1}
         maxZoom={1.5}
-        defaultZoom={defaultZoom}
+        defaultZoom={viewParams.zoom}
         onElementClick={onElementClick}
         elementsSelectable={false}
         nodesDraggable={false}
         nodesConnectable={false}
         zoomOnPinch={false}
         onlyRenderVisibleElements={true}
+        onMoveEnd={onMoveEnd}
       >
         <div>
           <Controls showInteractive={false} showFitView={true} >

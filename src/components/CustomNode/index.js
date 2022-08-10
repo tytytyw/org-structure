@@ -27,6 +27,7 @@ function CustomNode({ data, ...props }) {
                         alt="avatar"
                         className={styles.icon}
                     /> : null}
+                    {data.status?.color ? <div className={classNames(styles.status, styles[data.status?.color])} title={data.status?.text || ""}></div> : ""}
                 </div>
                 <div className={styles.text}>
                     <p className={styles.name} title={(data?.name || '') + " " + (data?.middleName || '')}>{(data?.name || '') + " " + (data?.middleName || '')}</p>

@@ -10,549 +10,638 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
   <script>
-    document.userNodes = [
-      {
+    document.userNodes = [{
+      data: {
+        avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-150x150.jpg",
+        name: "Игорь",
+        middleName: "Александрович",
+        surname: "Фамилин",
+        position: "Ген. директор",
+        isNotTarget: !0,
+        status: {
+          // yellow; green; red; gray
+          color: 'green',
+          text: 'работает'
+        }
+      },
+      id: "1",
+      subordinates: [{
         data: {
-          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-150x150.jpg',
-          name: 'Игорь',
-          middleName: 'Александрович',
-          surname: 'Фамилин',
-          position: 'Ген. директор',
-          isNotTarget: true,
+          avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg",
+          name: "Имя",
+          middleName: "Отчество",
+          surname: "Фамилия",
+          position: "Начальник отдела продаж",
+          status: {
+            color: 'yellow',
+            text: 'обед'
+          }
         },
-        id: '1',
-        subordinates: [
-          {
-            data: {
-              avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg',
-              name: 'Имя',
-              middleName: 'Отчество',
-              surname: 'Фамилия',
-              position: 'Начальник отдела продаж',
-            },
-            id: '2',
-            subordinates: [
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '3',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer4-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '4',
-
-              },
-            ],
-
+        id: "2",
+        subordinates: [{
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'red',
+              text: 'не работает'
+            }
           },
-          {
-            data: {
-              avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg',
-              name: 'Имя',
-              middleName: 'Отчество',
-              surname: 'Фамилия',
-              position: 'Начальник отдела закупок',
-            },
-            id: '5',
-            subordinates: [
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '6',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '7',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer8-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-                },
-                subordinates: [
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer9-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'Фамилия',
-                      position: 'Менеджер-стажер',
-
-                    },
-                    subordinates: [
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-
-                        },
-                        id: '35',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-
-                        },
-                        id: '36',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-
-                        },
-                        id: '37',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer4-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-
-                        },
-                        id: '38',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-
-                        },
-                        id: '39',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-
-                        },
-                        id: '40',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-
-                        },
-                        id: '41',
-                      },
-                      {
-                        data: {
-                          avatar: '',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Без аватарки',
-
-                        },
-                        id: '42',
-                      },
-                    ],
-                    id: '9',
-
-                  }],
-                id: '8',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '10',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '11',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '12',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '13',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer8-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '14',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer9-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '15',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '16',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '17',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '18',
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Должность',
-                },
-                id: '19',
-                subordinates: [
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'Фамилия',
-                      position: 'Менеджер',
-
-                    },
-                    id: '21',
-                  },
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer4-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'Фамилия',
-                      position: 'Менеджер',
-
-                    },
-                    id: '22',
-                  },
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'Фамилия',
-                      position: 'Менеджер',
-                    },
-                    id: '23',
-                  },
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'Фамилия',
-                      position: 'Менеджер',
-                    },
-                    id: '24',
-                  },
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'Фамилия',
-                      position: 'Менеджер',
-                    },
-                    id: '25',
-                  },
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer9-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'Фамилия',
-                      position: 'Менеджер',
-                    },
-                    id: '26',
-                  },
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'Фамилия',
-                      position: 'Менеджер',
-                    },
-                    id: '27',
-                  },
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer8-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'Фамилия',
-                      position: 'Менеджер',
-                    },
-                    id: '28',
-                  },
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'Фамилия',
-                      position: 'Менеджер',
-                    },
-                    id: '29',
-                  },
-                  {
-                    data: {
-                      avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-150x150.jpg',
-                      name: 'Имя',
-                      middleName: 'Отчество',
-                      surname: 'ДлиннаяФамилияЧеловка',
-                      position: 'Менеджер',
-                    },
-                    id: '30',
-                    subordinates: [
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'ДлинноеОтчествоЧеловека',
-                          surname: 'Фамилия',
-                          position: 'Менеджер',
-                        },
-                        id: '31',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer4-150x150.jpg',
-                          name: 'ДлинноеИмяЧеловка',
-                          middleName: 'ДлинноеОтчествоЧеловека',
-                          surname: 'ДлиннаяФамилияЧеловка',
-                          position: 'Менеджер',
-                        },
-                        id: '32',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg',
-                          name: 'ОченьДлинноеИмяЧеловка',
-                          middleName: 'ДлинноеОтчествоЧеловека',
-                          surname: 'Фамилия',
-                          position: 'Менеджер',
-                        },
-                        id: '33',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-150x150.jpg',
-                          name: 'ОченьДлинноеИмяЧеловка',
-                          middleName: 'ДлинноеОтчествоЧеловека',
-                          surname: 'ДлиннаяФамилияЧеловка',
-                          position: 'ДлиннаяДолжность из четырех слов',
-                        },
-                        id: '34',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-                        },
-                        id: '45',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-                        },
-                        id: '46',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-                        },
-                        id: '47',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-                        },
-                        id: '48',
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer8-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-                        },
-                        id: '49',
-                        
-                      },
-                      {
-                        data: {
-                          avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer9-150x150.jpg',
-                          name: 'Имя',
-                          middleName: 'Отчество',
-                          surname: 'Фамилия',
-                          position: 'Должность',
-                        },
-                        id: '50',
-                      },
-
-                    ]
-                  },
-                ]
-
-              },
-              {
-                data: {
-                  avatar: 'https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-150x150.jpg',
-                  name: 'Имя',
-                  middleName: 'Отчество',
-                  surname: 'Фамилия',
-                  position: 'Менеджер',
-
-                },
-                id: '20',
-
-              }
-            ],
-
+          id: "3"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer4-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'gray',
+              text: 'отсуствует'
+            }
+          },
+          id: "4"
+        }]
+      }, {
+        data: {
+          avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg",
+          name: "Имя",
+          middleName: "Отчество",
+          surname: "Фамилия",
+          position: "Начальник отдела закупок",
+          status: {
+            color: 'green',
+            text: 'работает'
           }
 
-        ],
-      },
-    ];
+        },
+        id: "5",
+        subordinates: [{
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'red',
+              text: 'работает'
+            }
+          },
+          id: "6"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер"
+          },
+          id: "7"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer8-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          subordinates: [{
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer9-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "Фамилия",
+              position: "Менеджер-стажер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            subordinates: [{
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "35"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "36"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "37"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer4-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "38"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "39"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "40"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "41"
+            }, {
+              data: {
+                avatar: "",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Без аватарки",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "42"
+            }],
+            id: "9"
+          }],
+          id: "8"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "10"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "11"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "12"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "13"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer8-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "14"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer9-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "15"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "16"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "17"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "18"
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Должность",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "19",
+          subordinates: [{
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "Фамилия",
+              position: "Менеджер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            id: "21"
+          }, {
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer4-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "Фамилия",
+              position: "Менеджер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            id: "22"
+          }, {
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "Фамилия",
+              position: "Менеджер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            id: "23"
+          }, {
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "Фамилия",
+              position: "Менеджер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            id: "24"
+          }, {
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "Фамилия",
+              position: "Менеджер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            id: "25"
+          }, {
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer9-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "Фамилия",
+              position: "Менеджер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            id: "26"
+          }, {
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "Фамилия",
+              position: "Менеджер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            id: "27"
+          }, {
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer8-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "Фамилия",
+              position: "Менеджер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            id: "28"
+          }, {
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "Фамилия",
+              position: "Менеджер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            id: "29"
+          }, {
+            data: {
+              avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-150x150.jpg",
+              name: "Имя",
+              middleName: "Отчество",
+              surname: "ДлиннаяФамилияЧеловка",
+              position: "Менеджер",
+              status: {
+                color: 'green',
+                text: 'работает'
+              }
+            },
+            id: "30",
+            subordinates: [{
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg",
+                name: "Имя",
+                middleName: "ДлинноеОтчествоЧеловека",
+                surname: "Фамилия",
+                position: "Менеджер",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "31"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer4-150x150.jpg",
+                name: "ДлинноеИмяЧеловка",
+                middleName: "ДлинноеОтчествоЧеловека",
+                surname: "ДлиннаяФамилияЧеловка",
+                position: "Менеджер",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "32"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer3-150x150.jpg",
+                name: "ОченьДлинноеИмяЧеловка",
+                middleName: "ДлинноеОтчествоЧеловека",
+                surname: "Фамилия",
+                position: "Менеджер",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "33"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-150x150.jpg",
+                name: "ОченьДлинноеИмяЧеловка",
+                middleName: "ДлинноеОтчествоЧеловека",
+                surname: "ДлиннаяФамилияЧеловка",
+                position: "ДлиннаяДолжность из четырех слов",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "34"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer2-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "45"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer5-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "46"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer6-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "47"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer7-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "48"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer8-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "49"
+            }, {
+              data: {
+                avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer9-150x150.jpg",
+                name: "Имя",
+                middleName: "Отчество",
+                surname: "Фамилия",
+                position: "Должность",
+                status: {
+                  color: 'green',
+                  text: 'работает'
+                }
+              },
+              id: "50"
+            }]
+          }]
+        }, {
+          data: {
+            avatar: "https://lawyer-bulgaria.bg/wp-content/uploads/2015/11/lawyer1-150x150.jpg",
+            name: "Имя",
+            middleName: "Отчество",
+            surname: "Фамилия",
+            position: "Менеджер",
+            status: {
+              color: 'green',
+              text: 'работает'
+            }
+          },
+          id: "20"
+        }]
+      }]
+    }]
+
 
   </script>
 </body>

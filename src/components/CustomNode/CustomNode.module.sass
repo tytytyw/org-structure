@@ -32,7 +32,8 @@
             background: #ededed
             border-radius: 50%
             user-select: none
-            pointer-events: none
+            // pointer-events: none
+            position: relative
             .icon
                 border-radius: 50%
                 object-fit: cover
@@ -40,6 +41,23 @@
                 width: 50px
                 image-rendering: -webkit-optimize-contrast
                 image-rendering: optimizespeed
+            .status
+                position: absolute
+                width: 6px
+                height: 6px
+                bottom: 2px
+                right: 2px
+                border-radius: 50%
+                border: 2px solid #fff
+                background: #e0e0e0
+                &.red
+                    background: #EB5757
+                &.yellow
+                    background: #F2994A
+                &.green
+                    background: #27AE60
+                &.gray
+                    background: #b4b4b4
         .position
             margin-top: 3px
             font-size: 10px
